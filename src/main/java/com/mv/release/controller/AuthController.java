@@ -102,15 +102,36 @@ public class AuthController {
             strRoles.forEach(role -> {
                 switch (role) {
                     case "admin":
-                        Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
+                        Role adminRole = roleRepository.findByName(ERole.admin)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
 
                         break;
-                    case "dev":
-                        Role modRole = roleRepository.findByName(ERole.ROLE_DEV)
+                    case "developer":
+                        Role modRole = roleRepository.findByName(ERole.developer)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
+
+                    case "manager":
+                        Role managerRole = roleRepository.findByName(ERole.manager)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(managerRole);
+
+                    case "devops":
+                        Role devopsRole = roleRepository.findByName(ERole.devops)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(devopsRole);
+
+                    case "release_manager":
+                        Role release_managerRole = roleRepository.findByName(ERole.release_manager)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(release_managerRole);
+
+                    case "qa":
+                        Role qaRole = roleRepository.findByName(ERole.qa)
+                                .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+                        roles.add(qaRole);
+
 
                         break;
                     default:
@@ -132,12 +153,11 @@ public class AuthController {
         return "success";
     }
 
-    @CrossOrigin
     @GetMapping("/view/releases/{role}/{empID}")
     @ResponseBody
     public List<Release> view_releases(@PathVariable("role") String role, @PathVariable("empID") long empID) {
         if (role.equals("developer")) {
-            List<Release> releases = releaseRepository.findbyempid(empID);
+            List<Release> releases = releaseRepository.findByEmpID(empID);
             return releases;
         } else if (role.equals("admin")) {
             List<Release> releases = releaseRepository.findAll();
@@ -145,14 +165,25 @@ public class AuthController {
         } else if (role.equals("manager")) {
             Optional<User> user = userRepository.findById(empID);
             long teamid = user.get().getPodid();
-            List<Release> releases = releaseRepository.findbypodid(teamid);
+            List<Release> releases = releaseRepository.findByPodid(teamid);
             return releases;
         } else if(role.equals("qa")){
             Optional<User> user=userRepository.findById(empID);
             String name=user.get().getUsername();
-            List<Release> releases = releaseRepository.findbyname(name);
+            List<Release> releases = releaseRepository.findByQapoc(name);
+            return releases;
+        }else if(role.equals("release_manager")){
+            String stage="Manager_approved";
+            List<Release> releases = releaseRepository.findbystage(stage);
             return releases;
         }
         return null;
+    }
+
+    @PutMapping("/releases/{rel_id}")
+    public String update_releases(@RequestBody Release release,@PathVariable("rel_id") long rel_id){
+        release.setRelease_id(rel_id);
+        releaseRepository.save(release);
+        return "success";
     }
 }
