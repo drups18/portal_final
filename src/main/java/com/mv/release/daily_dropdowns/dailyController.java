@@ -20,11 +20,11 @@ public class dailyController {
         return repod.findById(dai.getSl_no());
     }
 
-//    @GetMapping(value = "/release_status")
-//    public List<Object> finddata() {
-////        List<Object> g = repod.finddata();
-////        return g;
-//    }
+    @GetMapping(value = "/release_status")
+    public List<Object> finddata() {
+        List<Object> g = repod.findrelease_status();
+        return g;
+    }
 
     @GetMapping(value = "/daily/dropdowns")
     public daily senddata(){

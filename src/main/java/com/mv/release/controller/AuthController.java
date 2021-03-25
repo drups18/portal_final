@@ -171,15 +171,15 @@ public class AuthController {
             long teamid = user.get().getPodid();
             List<Release> releases = releaseRepository.findByPodid(teamid);
             return releases;
-        } else if(role.equals("qa")){
-            Optional<User> user=userRepository.findById(empID);
-            String name=user.get().getUsername();
+        } else if (role.equals("qa")) {
+            Optional<User> user = userRepository.findById(empID);
+            String name = user.get().getUsername();
             List<Release> releases = releaseRepository.findByQapoc(name);
             return releases;
-        }else if(role.equals("release_manager")){
+        } else if (role.equals("release_manager")) {
             List<Release> releases = releaseRepository.findByRelease_status();
             return releases;
-        }else if(role.equals("devops")){
+        } else if (role.equals("devops")) {
             List<Release> releases = releaseRepository.findByReleasestatus();
             return releases;
         }
@@ -187,9 +187,17 @@ public class AuthController {
     }
 
     @PutMapping("/releases/{rel_id}")
-    public String update_releases(@RequestBody Release release,@PathVariable("rel_id") long rel_id){
+    public String update_releases(@RequestBody Release release, @PathVariable("rel_id") long rel_id) {
         release.setRelease_id(rel_id);
         releaseRepository.save(release);
         return "success";
     }
+
+    @PutMapping("/users/edit")
+    public String update_users(@RequestBody User user) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        userRepository.save(user);
+        return "success";
+    }
 }
+
