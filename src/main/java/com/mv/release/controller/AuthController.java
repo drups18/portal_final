@@ -111,27 +111,30 @@ public class AuthController {
                         Role modRole = roleRepository.findByName(ERole.developer)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
+                        break;
 
                     case "manager":
                         Role managerRole = roleRepository.findByName(ERole.manager)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(managerRole);
+                        break;
 
                     case "devops":
                         Role devopsRole = roleRepository.findByName(ERole.devops)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(devopsRole);
+                        break;
 
                     case "release_manager":
                         Role release_managerRole = roleRepository.findByName(ERole.release_manager)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(release_managerRole);
+                        break;
 
                     case "qa":
                         Role qaRole = roleRepository.findByName(ERole.qa)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(qaRole);
-
 
                         break;
                     default:
@@ -146,8 +149,9 @@ public class AuthController {
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @CrossOrigin
+
     @PostMapping("/releases")
+    @CrossOrigin
     public String releases(@RequestBody Release release) {
         releaseRepository.save(release);
         return "success";
