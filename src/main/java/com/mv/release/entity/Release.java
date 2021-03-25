@@ -6,7 +6,7 @@ import java.util.Date;
 public class Release {
     private Long release_id;
     private Long empID;
-    private String podid;
+    private Long podid;
     private String Description;
     private String impact;
     private String impact_area;
@@ -59,10 +59,11 @@ public class Release {
         this.empID = empID;
     }
 
-    public String getPodid() {
+    public long getPodid() {
         return podid;
     }
-    public void setPodid(String podid) {
+
+    public void setPodid(long podid) {
         this.podid = podid;
     }
 

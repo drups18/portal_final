@@ -173,8 +173,10 @@ public class AuthController {
             List<Release> releases = releaseRepository.findByQapoc(name);
             return releases;
         }else if(role.equals("release_manager")){
-            String stage="Manager_approved";
-            List<Release> releases = releaseRepository.findbystage(stage);
+            List<Release> releases = releaseRepository.findByRelease_status();
+            return releases;
+        }else if(role.equals("devops")){
+            List<Release> releases = releaseRepository.findByReleasestatus();
             return releases;
         }
         return null;
