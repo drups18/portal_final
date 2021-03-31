@@ -37,4 +37,7 @@ public interface HotfixRepository extends JpaRepository<hotfix_entity,Long> {
     @Query(value = "select type_of_release from hotfix_entity", nativeQuery = true)
     public List<Object> type_of_release();
 
+    @Query(value = "select type_of_release3 from hotfix_entity", nativeQuery = true)
+    public List<Object> type_of_release3();
+
 }

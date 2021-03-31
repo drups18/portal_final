@@ -12,6 +12,18 @@ public class hotfix_entity {
     private String release_status;
     private String approved_by;
     private String type_of_release;
+    private String type_of_release3;
+
+
+    @Column(nullable = true)
+    public String getType_of_release3() {
+        return type_of_release3;
+    }
+
+    public void setType_of_release3(String type_of_release3) {
+        this.type_of_release3 = type_of_release3;
+    }
+
 
     @Column(nullable = true)
     public String getPod() {

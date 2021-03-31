@@ -11,15 +11,17 @@ public class hotfix {
     List<Object> release_status = new ArrayList<>();
     List<Object> appoved_by = new ArrayList<>();
     List<Object> type_of_release = new ArrayList<>();
+    List<Object> type_of_release3 = new ArrayList<>();
 
     public hotfix(List<Object> pod, List<Object> impact_areas, List<Object> impact, List<Object> release_status
-            , List<Object> appoved_by, List<Object> type_of_release) {
+            , List<Object> appoved_by, List<Object> type_of_release, List<Object> type_of_release3) {
         this.pod = pod;
         this.impact_areas = impact_areas;
         this.impact = impact;
         this.release_status = release_status;
         this.appoved_by = appoved_by;
         this.type_of_release = type_of_release;
+        this.type_of_release3 = type_of_release3;
     }
 
     public List<Object> getPod() {

@@ -15,8 +15,12 @@ public class JwtUtils {
     private static final Logger logger = LoggerFactory.getLogger(JwtUtils.class);
 
 
-    private String jwtSecret="nishant";
-    private int jwtExpirationMs=86400000;
+
+    @Value("${portal.app.jwtSecret}")
+    private String jwtSecret;
+
+    @Value("${portal.app.jwtExpirationMs}")
+    private int jwtExpirationMs;
 
     public String generateJwtToken(Authentication authentication) {
 

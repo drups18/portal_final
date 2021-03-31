@@ -12,8 +12,7 @@ public interface ReleaseRepository extends JpaRepository<Release,Long> {
     List<Release> findByEmpID(long empID);
 
    // @Query(value = "Select * from all_new_releases where pod_id=?1",nativeQuery = true)
-    List<Release> findByPodid(long
-                                      teamid);
+    List<Release> findByPodid(long teamid);
 
     //    @Query(value="Select * from all_new_releases where qa_poc=?1",nativeQuery = true)
     List<Release> findByQapoc(String name);

@@ -56,8 +56,10 @@ public class HotfixController {
         appoved_by.removeAll(Collections.singletonList(null));
         List<Object> type_of_release = repoh.type_of_release();
         type_of_release.removeAll(Collections.singletonList(null));
+        List<Object> type_of_release3 = repoh.type_of_release3();
+        type_of_release3.removeAll(Collections.singletonList(null));
 
-        hotfix h = new hotfix(pod, impact_areas, impact, release_status, appoved_by, type_of_release);
+        hotfix h = new hotfix(pod, impact_areas, impact, release_status, appoved_by, type_of_release,type_of_release3);
 
         return h;
 

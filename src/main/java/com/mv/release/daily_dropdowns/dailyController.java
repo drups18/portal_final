@@ -1,5 +1,4 @@
 package com.mv.release.daily_dropdowns;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -7,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 public class dailyController {
 
@@ -15,18 +15,20 @@ public class dailyController {
 
     @PostMapping("/daily/populate")
     @CrossOrigin
-    public Optional popu(@RequestBody daily_table dai){
+    public Optional populate(@RequestBody daily_table dai){
         repod.save(dai);
         return repod.findById(dai.getSl_no());
     }
 
     @GetMapping(value = "/release_status")
+    @CrossOrigin
     public List<Object> finddata() {
-        List<Object> g = repod.findrelease_status();
-        return g;
+        List<Object> release_status = repod.findrelease_status();
+        return release_status;
     }
 
     @GetMapping(value = "/daily/dropdowns")
+    @CrossOrigin
     public daily senddata(){
         /*
             @Column(nullable = true)

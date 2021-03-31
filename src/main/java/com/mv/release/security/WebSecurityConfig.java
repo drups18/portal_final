@@ -3,6 +3,7 @@ package com.mv.release.security;
 
 import com.mv.release.jwt.AuthEntryPointJwt;
 import com.mv.release.jwt.AuthTokenFilter;
+import com.mv.release.jwt.SimpleCORSFilter;
 import com.mv.release.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,6 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public AuthTokenFilter authenticationJwtTokenFilter() {
         return new AuthTokenFilter();
     }
+//
+//    @Bean
+//    public SimpleCORSFilter corsFilter() {
+//        return new SimpleCORSFilter();
+//    }
 
     @Override
     public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -59,8 +65,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers("/api/auth/**").permitAll()
                 .antMatchers("/api/test/**").permitAll()
+                .antMatchers("/releases").permitAll()
+                .antMatchers("/daily/dropdowns").permitAll()
                 .anyRequest().authenticated();
 
+
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterBefore(corsFilter(), AuthTokenFilter.class);
     }
 }
